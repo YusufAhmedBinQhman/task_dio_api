@@ -20,16 +20,12 @@ class _TabBarScreenState extends State<TabBarScreen> {
             tabs: [
               Tab(text: 'All Todos'),
               Tab(text: 'Completed'),
-              Tab(text: 'Incomplete'),
+              Tab(text: 'InProgress'),
             ],
           ),
         ),
         body: TabBarView(
-          children: [
-            AllTodoScreen(), // شاشة كل المهام
-            Text("Complete"), // CompletedTodoScreen(),  // شاشة المهام المكتملة
-            InprogressTodo() // IncompleteTodoScreen(),  // شاشة المهام غير المكتملة
-          ],
+          children: [AllTodoScreen(), CompTodo(), InCompTodo()],
         ),
       ),
     );

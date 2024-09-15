@@ -1,5 +1,7 @@
 import 'package:dio_api_task/core/models/Todo.dart';
 import 'package:dio_api_task/core/view_models/TodosVM.dart';
+import 'package:dio_api_task/core/views/components/CustomWidget/Container_Wid.dart';
+import 'package:dio_api_task/core/views/components/CustomWidget/Text_wid.dart';
 import 'package:flutter/material.dart';
 
 class AllTodoScreen extends StatefulWidget {
@@ -13,14 +15,14 @@ class _AllTodoScreenState extends State<AllTodoScreen> {
   @override
   void initState() {
     super.initState();
-    futureTodos = TodoService().fetchTodos();
+    futureTodos = TodoVM().getAllTodos();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Todos'),
+        title: TextWid(Txt: "All Todo"),
       ),
       body: FutureBuilder<List<Todo>>(
         future: futureTodos,
@@ -35,9 +37,23 @@ class _AllTodoScreenState extends State<AllTodoScreen> {
               itemCount: todos.length,
               itemBuilder: (context, index) {
                 final todo = todos[index];
-                return ListTile(
-                  title: Text(todo.todo),
-                  subtitle: Text('Completed: ${todo.completed}'),
+                return ContainerWid(
+                  colorW: Colors.white,
+                  childW: ListTile(
+                    title: TextWid(Txt: todo.todo),
+                    subtitle: Row(
+                      children: [
+                        TextWid(Txt: "Completed: ${todo.completed}"),
+                        Spacer(),
+                        Column(
+                          children: [
+                            TextWid(Txt: "id: ${todo.id}"),
+                            TextWid(Txt: "userId: ${todo.userId}"),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             );
